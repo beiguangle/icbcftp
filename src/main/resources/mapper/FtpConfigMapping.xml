@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icbc.ftp.dao.FtpConfigDao">
+
+    <resultMap type="com.icbc.ftp.entity.FtpConfig" id="FtpConfigMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="remotePath" column="remote_path" jdbcType="VARCHAR"/>
+        <result property="accName" column="acc_name" jdbcType="VARCHAR"/>
+        <result property="accNo" column="acc_no" jdbcType="VARCHAR"/>
+        <result property="ftpHost" column="ftp_host" jdbcType="VARCHAR"/>
+        <result property="ftpPort" column="ftp_port" jdbcType="VARCHAR"/>
+        <result property="ftpUser" column="ftp_user" jdbcType="VARCHAR"/>
+        <result property="ftpPass" column="ftp_pass" jdbcType="VARCHAR"/>
+        <result property="localPath" column="local_path" jdbcType="VARCHAR"/>
+        <result property="bankCode" column="bank_code" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="FtpConfigMap">
+        select
+          id, remote_path, acc_name, acc_no, ftp_host, ftp_port, ftp_user, ftp_pass, local_path, bank_code
+        from main.ftp_config
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="FtpConfigMap">
+        select
+          id, remote_path, acc_name, acc_no, ftp_host, ftp_port, ftp_user, ftp_pass, local_path, bank_code
+        from main.ftp_config
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="FtpConfigMap">
+        select
+          id, remote_path, acc_name, acc_no, ftp_host, ftp_port, ftp_user, ftp_pass, local_path, bank_code
+        from main.ftp_config
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into main.ftp_config(remote_path, acc_name, acc_no, ftp_host, ftp_port, ftp_user, ftp_pass, local_path, bank_code)
+        values (#{remotePath}, #{accName}, #{accNo}, #{ftpHost}, #{ftpPort}, #{ftpUser}, #{ftpPass}, #{localPath}, #{bankCode})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update main.ftp_config
+        <set>
+            <if test="remotePath != null and remotePath != ''">
+                remote_path = #{remotePath},
+            </if>
+            <if test="accName != null and accName != ''">
+                acc_name = #{accName},
+            </if>
+            <if test="accNo != null and accNo != ''">
+                acc_no = #{accNo},
+            </if>
+            <if test="ftpHost != null and ftpHost != ''">
+                ftp_host = #{ftpHost},
+            </if>
+            <if test="ftpPort != null and ftpPort != ''">
+                ftp_port = #{ftpPort},
+            </if>
+            <if test="ftpUser != null and ftpUser != ''">
+                ftp_user = #{ftpUser},
+            </if>
+            <if test="ftpPass != null and ftpPass != ''">
+                ftp_pass = #{ftpPass},
+            </if>
+            <if test="localPath != null and localPath != ''">
+                local_path = #{localPath},
+            </if>
+            <if test="bankCode != null and bankCode != ''">
+                bank_code = #{bankCode},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from main.ftp_config where id = #{id}
+    </delete>
+
+</mapper>

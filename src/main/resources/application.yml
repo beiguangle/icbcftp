@@ -1,0 +1,33 @@
+app:
+  instance:
+    code: icbcftp
+  error:
+    prefix: P
+server:
+  servlet:
+    session:
+      timeout: 600s
+    encoding:
+      force: true
+  # connection-timeout: 10s
+  tomcat:
+    connection-timeout: 10s
+logging:
+  config: classpath:logback-config.xml
+  file:
+    name: ${app.instance.code}
+    path: ./log
+  level:
+    root: info
+    com.icbc: debug
+spring:
+  application:
+    name: ${app.instance.code}-${spring.profiles.active}
+  profiles:
+    active: local
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.icbc.ftp.dao

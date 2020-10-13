@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ftp参数配置</title>
+</head>
+<body class="sticky-header">
+<div class="container-fluid">
+    <div class="col-sm-12" id="right">
+        <div class="table-responsive">
+            <div class="btn-group" id="toolbar">
+                <button id="btn_add" type="button" class="btn btn-default" data-toggle="modal" data-target="#add">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+                </button>
+                <button id="btn_down" type="button" class="btn btn-default" data-toggle="modal" data-target="#down">
+                    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>下载
+                </button>
+            </div>
+            <table class="table table-striped" id="configTable">
+            </table>
+            <!--新增模态框-->
+            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                 id="myModal1">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel1">新增参数配置</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" class="form-horizontal" id="form_add">
+                                <input type="hidden" class="form-control" id="id">
+                                <div class="form-group">
+                                    <label for="bankCode" class="col-sm-2 control-label">银行名称</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control" id="bankCode" name="bankCode">
+                                            <option value="" selected>---请选择---</option>
+                                            <option value="icbc">中国工商银行</option>
+                                            <option value="rcb">农村信用社</option>
+                                            <option value="psbc">中国邮政储蓄银行</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="accName" class="col-sm-2 control-label">账户名称</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="accName" name="accName">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="accNo" class="col-sm-2 control-label">账号</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="accNo" name="accNo">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ftpHost" class="col-sm-2 control-label">ftp地址</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="ftpHost" name="ftpHost">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ftpPort" class="col-sm-2 control-label">ftp端口</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="ftpPort" name="ftpPort">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ftpUser" class="col-sm-2 control-label">ftp用户名</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="ftpUser" name="ftpUser">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ftpPass" class="col-sm-2 control-label">ftp密码</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="ftpPass" name="ftpPass">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="remotePath" class="col-sm-2 control-label">ftp远程目录</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="remotePath" name="remotePath">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary" id="sava-btn">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--文件下载模态框-->
+            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                 id="myModal2">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel3">文件下载</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" class="form-horizontal" id="form_edit" method="post">
+                                <div class="form-group">
+                                    <label for="datetimepicker" class="col-sm-2 control-label">选择日期：</label>
+                                    <!--指定 date标记-->
+                                    <div class='col-sm-4 input-group date' id='datetimepicker'>
+                                        <input type='text' id="tranDate" class="form-control"/>
+                                        <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="button" class="btn btn-primary" id="down-btn">下载</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/js/ftpconfig.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+group 'com.icbc'
+version '1.0.0'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+ext {
+    snippetsDir = file("$buildDir/generated-snippets")
+}
+
+buildscript {
+    ext {
+        springBootVersion = '2.2.1.RELEASE'
+        springCloudVersion = 'Hoxton.RELEASE'
+        // gralde -Prelease
+        if (project.hasProperty('release')) {
+            releasePublish = true
+        } else {
+            releasePublish = false
+        }
+    }
+    repositories {
+        mavenLocal()
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        maven { url 'https://maven.bestvike.com/repository/maven-public/' }
+    }
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.8.RELEASE"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+    }
+}
+
+repositories {
+    mavenLocal()
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+    maven { url 'https://maven.bestvike.com/repository/maven-public/' }
+    maven { url 'https://maven.bestvike.com/repository/third-party/' }
+    flatDir {
+        dirs 'lib'
+    }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.boot:spring-boot-starter-parent:' + springBootVersion
+        mavenBom 'org.springframework.cloud:spring-cloud-dependencies:' + springCloudVersion
+    }
+}
+
+bootJar {
+    baseName = project.name
+    version = project.version
+    from('static') {
+        into 'static'
+    }
+}
+test {
+    outputs.dir snippetsDir
+}
+dependencies {
+    compile("com.bestvike:commons:1.0.12-SNAPSHOT")
+
+    // spring boot
+    compile("org.springframework.boot:spring-boot-starter")
+    compile("org.springframework.boot:spring-boot-starter-web")
+    //thymeleaf
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    compile("org.springframework.boot:spring-boot-starter-jdbc")
+    compile("org.springframework.cloud:spring-cloud-starter-netflix-zuul")
+    compile("org.springframework.boot:spring-boot-starter-websocket")
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools
+    //compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.3.3.RELEASE'
+
+
+
+    compile("org.mybatis:mybatis:3.5.2")
+    compile("tk.mybatis:mapper:4.1.5")
+    compile("com.github.pagehelper:pagehelper:5.1.8")
+    compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.0.1")
+
+    compile("net.logstash.logback:logstash-logback-encoder:5.2")
+    compile("org.projectlombok:lombok:1.16.16")
+    // https://mvnrepository.com/artifact/commons-net/commons-net
+    compile group: 'commons-net', name: 'commons-net', version: '3.6'
+
+
+    compile group: 'cn.hutool', name: 'hutool-all', version: '5.4.3'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-quartz', version: '2.2.1.RELEASE'
+    compile group: 'com.alibaba', name: 'druid-spring-boot-starter', version: '1.1.10'
+    compile group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.2'
+
+    compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.11.1'
+    compile("dom4j:dom4j:1.6.1")
+    compile group: 'org.springframework', name: 'spring-context-support', version: '5.2.8.RELEASE'
+    compile group: 'org.jsoup', name: 'jsoup', version: '1.11.3'
+
+    compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.30.1'
+
+}
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
