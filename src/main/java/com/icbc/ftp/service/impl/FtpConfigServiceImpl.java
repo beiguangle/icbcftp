@@ -1,7 +1,6 @@
 package com.icbc.ftp.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import cn.hutool.core.codec.Base64;
 import com.icbc.ftp.dao.FtpConfigDao;
 import com.icbc.ftp.entity.FtpConfig;
 import com.icbc.ftp.service.FtpConfigService;
@@ -43,13 +42,9 @@ public class FtpConfigServiceImpl implements FtpConfigService {
      */
     @Override
     public Map<String, Object> queryAllByLimit(int pageNumber, int pageSize) {
-        Map<String, Object> map = new HashMap();
-        PageHelper.startPage(pageNumber, pageSize);
-        List<FtpConfig> list = ftpConfigDao.queryAll();
-        //取记录总条数
-        PageInfo<FtpConfig> pageInfo = new PageInfo(list);
-        long total = pageInfo.getTotal();
-        map.put("total", total);
+        Map<String, Object> map = new HashMap<String, Object>(16);
+        List<FtpConfig> list = ftpConfigDao.queryAllByLimit(pageNumber,pageSize);
+        map.put("total", ftpConfigDao.queryAll().size());
         map.put("rows", list);
         return map;
     }

@@ -15,4 +15,4 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.icbc.ftp.dao
 download:
-  path: /icbc
+  path: D:/icbc

@@ -31,16 +31,6 @@
         </encoder>
     </appender>
 
-    <appender name="VISIT_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>${LOG_PATH}/%d{yyyy-MM-dd}/${LOG_FILE}.%d{yyyy-MM-dd}.visit.log</FileNamePattern>
-        </rollingPolicy>
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} %contextName [%X{X-B3-TraceId:-}-%X{X-B3-SpanId:-}-%X{X-Span-Export:-}] [%thread] - %msg%n
-            </pattern>
-        </encoder>
-    </appender>
-
     <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
         <param name="Encoding" value="UTF-8"/>
         <destination>172.10.11.112:5044</destination>.
@@ -54,12 +44,6 @@
 
     <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
         <appender-ref ref="FILE"/>
-        <queueSize>512</queueSize>
-        <discardingThreshold>0</discardingThreshold>
-    </appender>
-
-    <appender name="VISIT_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
-        <appender-ref ref="VISIT_LOG"/>
         <queueSize>512</queueSize>
         <discardingThreshold>0</discardingThreshold>
     </appender>

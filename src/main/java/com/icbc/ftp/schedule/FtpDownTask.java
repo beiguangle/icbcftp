@@ -136,9 +136,13 @@ public class FtpDownTask {
     }
 
     public static void main(String[] args) {
+//        System.out.println(LocalDateTime.now().plusDays(-1).format(DateTimeFormatter.ofPattern("yyyyMMdd")));
         Ftp ftpClient = new Ftp("192.168.3.56", 21, "ftpuser", "zxc45018");
         ftpClient.init();
-
-        ftpClient.download("/20201012","2345haozip_v6.2.0.11032.exe", new File("H:\\qq\\1.exe"));
+        System.out.println(ftpClient.existFile("/20201012"));
+        String lastDay = LocalDateTime.now().plusDays(-1).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        List<String> list = ftpClient.ls("/20201012").stream().filter(m -> m.contains(lastDay)).filter(m -> m.endsWith(".zip")).collect(Collectors.toList());;
+        System.out.println(list);
+        //ftpClient.download("/20201012","2345haozip_v6.2.0.11032.exe", new File("H:\\qq\\1.exe"));
     }
 }
