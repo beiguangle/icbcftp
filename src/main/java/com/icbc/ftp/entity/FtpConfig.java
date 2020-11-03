@@ -28,7 +28,7 @@ public class FtpConfig implements Serializable {
 
     private String ftpUser;
 
-    private String ftpPass;
+    private String priKeyPath;
 
     private String localPath;
 
@@ -91,12 +91,12 @@ public class FtpConfig implements Serializable {
         this.ftpUser = ftpUser;
     }
 
-    public String getFtpPass() {
-        return ftpPass;
+    public String getPriKeyPath() {
+        return priKeyPath;
     }
 
-    public void setFtpPass(String ftpPass) {
-        this.ftpPass = ftpPass;
+    public void setPriKeyPath(String priKeyPath) {
+        this.priKeyPath = priKeyPath;
     }
 
     public String getLocalPath() {

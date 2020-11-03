@@ -10,7 +10,7 @@
         <result property="ftpHost" column="ftp_host" jdbcType="VARCHAR"/>
         <result property="ftpPort" column="ftp_port" jdbcType="VARCHAR"/>
         <result property="ftpUser" column="ftp_user" jdbcType="VARCHAR"/>
-        <result property="ftpPass" column="ftp_pass" jdbcType="VARCHAR"/>
+        <result property="priKeyPath" column="priKeyPath" jdbcType="VARCHAR"/>
         <result property="localPath" column="local_path" jdbcType="VARCHAR"/>
         <result property="bankCode" column="bank_code" jdbcType="INTEGER"/>
     </resultMap>
@@ -18,7 +18,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="FtpConfigMap">
         select
-          id, remote_path, acc_name, acc_no, ftp_host, ftp_port, ftp_user, ftp_pass, local_path, bank_code
+          id, remote_path, acc_name, acc_no, ftp_host, ftp_port, ftp_user, priKeyPath, local_path, bank_code
         from main.ftp_config
         where id = #{id}
     </select>
@@ -26,7 +26,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="FtpConfigMap">
         select
-          id, remote_path, acc_name, acc_no, ftp_host, ftp_port, ftp_user, ftp_pass, local_path, bank_code
+          id, remote_path, acc_name, acc_no, ftp_host, ftp_port, ftp_user, priKeyPath, local_path, bank_code
         from main.ftp_config
         limit #{offset}, #{limit}
     </select>
@@ -34,14 +34,19 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="FtpConfigMap">
         select
-          id, remote_path, acc_name, acc_no, ftp_host, ftp_port, ftp_user, ftp_pass, local_path, bank_code
+          id, remote_path, acc_name, acc_no, ftp_host, ftp_port, ftp_user, priKeyPath, local_path, bank_code
         from main.ftp_config
     </select>
-
+    <select id="queryByBankCode" resultMap="FtpConfigMap">
+        select
+            id, remote_path, acc_name, acc_no, ftp_host, ftp_port, ftp_user, priKeyPath, local_path, bank_code
+        from main.ftp_config
+        where bank_code = #{bankCode}
+    </select>
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into main.ftp_config(remote_path, acc_name, acc_no, ftp_host, ftp_port, ftp_user, ftp_pass, local_path, bank_code)
-        values (#{remotePath}, #{accName}, #{accNo}, #{ftpHost}, #{ftpPort}, #{ftpUser}, #{ftpPass}, #{localPath}, #{bankCode})
+        insert into main.ftp_config(remote_path, acc_name, acc_no, ftp_host, ftp_port, ftp_user, priKeyPath, local_path, bank_code)
+        values (#{remotePath}, #{accName}, #{accNo}, #{ftpHost}, #{ftpPort}, #{ftpUser}, #{priKeyPath}, #{localPath}, #{bankCode})
     </insert>
 
     <!--通过主键修改数据-->
@@ -66,8 +71,8 @@
             <if test="ftpUser != null and ftpUser != ''">
                 ftp_user = #{ftpUser},
             </if>
-            <if test="ftpPass != null and ftpPass != ''">
-                ftp_pass = #{ftpPass},
+            <if test="priKeyPath != null and priKeyPath != ''">
+                priKeyPath = #{priKeyPath},
             </if>
             <if test="localPath != null and localPath != ''">
                 local_path = #{localPath},

@@ -64,8 +64,8 @@ $(function () {
                 title: 'ftp用户名'
             },
             {
-                field: 'ftpPass',
-                title: 'ftp密码'
+                field: 'priKeyPath',
+                title: '秘钥文件路径'
             },
             {
                 field: 'remotePath',
@@ -138,10 +138,10 @@ $(function () {
                         message: 'ftp用户名不能为空'
                     }
                 }
-            }, ftpPass: {
+            }, priKeyPath: {
                 validators: {
                     notEmpty: {
-                        message: 'ftp密码不能为空'
+                        message: '秘钥文件路径'
                     }
                 }
             }, remotePath: {
@@ -251,7 +251,7 @@ $("#sava-btn").click(function () {
     var ftpHost = $("#ftpHost").val();
     var ftpPort = $("#ftpPort").val();
     var ftpUser = $("#ftpUser").val();
-    var ftpPass = $("#ftpPass").val();
+    var priKeyPath = $("#priKeyPath").val();
     var remotePath = $("#remotePath").val();
     $('#form_add').data('bootstrapValidator').validate();
     if (!$('#form_add').data('bootstrapValidator').isValid()) {
@@ -268,7 +268,7 @@ $("#sava-btn").click(function () {
                 ftpHost: ftpHost,
                 ftpPort: ftpPort,
                 ftpUser: ftpUser,
-                ftpPass: ftpPass,
+                priKeyPath: priKeyPath,
                 remotePath: remotePath
             },
             dataType: "json",
@@ -297,7 +297,7 @@ $("#sava-btn").click(function () {
                 ftpHost: ftpHost,
                 ftpPort: ftpPort,
                 ftpUser: ftpUser,
-                ftpPass: ftpPass,
+                priKeyPath: priKeyPath,
                 remotePath: remotePath
             },
             dataType: "json",
@@ -331,7 +331,7 @@ function upConfig(index) {
         $("#ftpHost").val(info.ftpHost);
         $("#ftpPort").val(info.ftpPort);
         $("#ftpUser").val(info.ftpUser);
-        $("#ftpPass").val(info.ftpPass);
+        $("#priKeyPath").val(info.priKeyPath);
         $("#remotePath").val(info.remotePath);
     }
 }

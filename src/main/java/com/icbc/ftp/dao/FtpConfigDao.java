@@ -41,6 +41,8 @@ public interface FtpConfigDao {
      */
     List<FtpConfig> queryAll();
 
+    List<FtpConfig> queryByBankCode(@Param("bankCode") String bankCode);
+
     /**
      * 新增数据
      *
