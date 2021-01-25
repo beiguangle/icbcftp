@@ -44,7 +44,7 @@ public class FtpDownTask {
      * @Author: bgl
      * @Date: 16:48
      */
-    //@Scheduled(cron = "0/5 * * * * ? ")
+    @Scheduled(cron = "0 0 0/2 * * ? ")
     public void downLoadGHDetail() {
         String ftpHost = "";
         int ftpPort = 0;
@@ -119,15 +119,15 @@ public class FtpDownTask {
      * @Author: bgl
      * @Date: 17:05
      */
-    @PostConstruct
-    //@Scheduled(cron = "0/5 * * * * ? ")
+    //@PostConstruct
+    //@Scheduled(cron = "0 0 7 * * ? ")
     public void downLoadYCDetail() {
-        String ftpHost = "";
-        int ftpPort = 0;
-        String ftpUser = "";
-        String priKeyPath = "";
-        String remotePath = "";
-        String accNo = "";
+        String ftpHost;
+        int ftpPort;
+        String ftpUser;
+        String priKeyPath;
+        String remotePath;
+        String accNo;
         try {
             //获取昨天日期
             String lastDay = LocalDateTime.now().plusDays(-1).format(DateTimeFormatter.ofPattern("yyyyMMdd"));
